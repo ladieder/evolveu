@@ -1,3 +1,5 @@
+//add comment as github test
+
 const data = {
 	staff: [
 		{fname:"Jane", lname:"Smith", balance:10},
