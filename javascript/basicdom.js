@@ -1,11 +1,6 @@
 console.log("Hello world from basicdom.js");
 console.log("DOM", document);
 
-// ????? Should you not use variable name same as id since browser creates global variable of that name?????
-
-// const idBtnPush = document.getElementById("idBtnPush");
-// const idH1 = document.getElementById("idH1");
-
 function onButtonPushed() {
 	// console.log("in onButtonPushed");
 	if (idH1.textContent === "Hello World") {
