@@ -1,0 +1,31 @@
+body {
+	font-family: calibri;
+}
+
+h4 {
+	text-align: center;
+}
+
+.column {
+	float: left;
+	width: 50%;
+}
+
+.card {
+	border: 3px solid; 
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+}
+
+.btns {
+  background-color: navy;
+  border: 10px white;
+  border-radius: 8px;
+  margin: 5px;
+  color: white;
+  padding: 20px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}

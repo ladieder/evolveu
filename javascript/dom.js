@@ -54,41 +54,81 @@ console.log("in dom.js cards exercise");
 
 let counter = 0;
 
+// ??? add <h> tags for div text???
+
 function createCard() {
 	console.log("in createCard");
-	const div = document.createElement("div");
-	div.textContent = "Card " + ++counter;
-	div.className = "card"
-	return div;
+	const newDiv = document.createElement("div");
+	const newH4 = document.createElement("h4");
+	newDiv.className = "card";
+	newH4.textContent = "Card " + ++counter;
+	newDiv.appendChild(newH4);
+	newDiv.appendChild(createBeforeBtn());
+	newDiv.appendChild(createAfterBtn());
+	newDiv.appendChild(createDeleteBtn());
+	return newDiv;
 }
 
-function createBtn(btnName, btnClass) {
-	console.log("in createBtn");
+function createBeforeBtn() {
+	console.log("in createBeforeBtn");
 	const btn = document.createElement("button");
-	btn.textContent = btnName;
-	btn.className = btnClass;
+	btn.className = "btns";
+	btn.textContent = "Add Before";
+	btn.addEventListener("click", addBeforeFunc);
 	return btn;
 }
 
-function addBeforeFunc() {
-
+function createAfterBtn() {
+	console.log("in createAfterBtn");
+	const btn = document.createElement("button");
+	btn.className = "btns";
+	btn.textContent = "Add After";
+	btn.addEventListener("click", addAfterFunc);
+	return btn;
 }
 
-function addAfterFunc() {
-	
+function createDeleteBtn() {
+	console.log("in createDeleteBtn");
+	const btn = document.createElement("button");
+	btn.className = "btns";
+	btn.textContent = "Delete";
+	btn.addEventListener("click", deleteFunc);
+	return btn;
 }
 
-function deleteFunc() {
-	
+function addBeforeFunc(e) {
+	console.log("in addBeforeFunc");
+	console.log("target", e.target);
+	console.log("parent", e.target.parentNode);
+	e.target.parentNode.parentNode.insertBefore(createCard(), e.target.parentNode);
 }
 
-function onAddClick() {
+
+// ??? not working correctly - add to end of node instead of after???
+
+function addAfterFunc(e) {
+	console.log("in addAfterFunc");	
+	console.log("target", e.target);
+	console.log("parent", e.target.parentNode);
+	e.target.parentNode.parentNode.insertBefore(createCard(), e.target.parentNode.nextSibling);
+}
+
+function deleteFunc(e) {
+	console.log("in deleteFunc");
+	e.target.parentNode.remove();	
+}
+
+// ??? use e.target instead of cards. ???
+
+function onAddClick(e) {
 	console.log("in onAddClick");
-	const newDiv = createCard();
-	cards.append(newDiv);
-	newDiv.appendChild(createBtn("Add Before", "beforeBtn"));
-	newDiv.appendChild(createBtn("Add After", "afterBtn"));
-	newDiv.appendChild(createBtn("Delete", "deleteBtn"));	
+	// console.log("target", e.target);
+	// console.log("parent", e.target.parentNode);
+	// console.log("next sibling", e.target.nextSibling);
+	cards.append(createCard());
+
+	// alternative method but still requires hardcoding an id (right)
+	// e.target.parentNode.insertBefore(createCard(), right);
 }
 
 addCardBtn.addEventListener("click", onAddClick);

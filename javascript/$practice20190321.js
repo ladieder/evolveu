@@ -1,5 +1,3 @@
-//add comment as github test
-
 const data = {
 	staff: [
 		{fname:"Jane", lname:"Smith", balance:10},
@@ -15,7 +13,7 @@ const data = {
 	prov: "Alberta"
 };
 
-const data2 = [
+const people = [
 	{fname:"Jane", lname:"Smith", age:30},
 	{fname:"Liam", lname:"Henry", age:32},
 	{fname:"Emma", lname:"Jones", age:42},
@@ -39,15 +37,26 @@ function balanceTotFunc(staffAr) {
 	return total;
 }
 
-function ageTotFunc(staffAr) {
+// function ageTotFunc(staffAr) {
+// 	console.log("in ageTotalFunc");
+// 	let total = 0;
+
+// 	staffAr.forEach(function(element) {
+// 		// console.log(element.age);
+// 		total += element.age;
+// 	});
+
+// 	return total;
+// }
+
+function ageTotFunc(people) {
 	console.log("in ageTotalFunc");
-	let total = 0;
 
-	staffAr.forEach(function(element) {
-		// console.log(element.age);
-		total += element.age;
-	});
-
+// ??? is this right way to use initialValue???
+	const initialValue = 0;
+	let total = people.reduce(function (accumulator, currentValue) {
+		return accumulator + currentValue.age;
+	}, initialValue);
 	return total;
 }
 
@@ -71,21 +80,17 @@ const balanceTotal = balanceTotFunc(data.staff);
 assertEquals(3823, balanceTotal);
 console.log("The total of balances is:", balanceTotal);
 
-console.log('-----staffAges')
-const ageTotal = ageTotFunc(data2);
+console.log('-----staffAgesTotal')
+const ageTotal = ageTotFunc(people);
 assertEquals(290, ageTotal);
 console.log("The total of ages is:", ageTotal);
 
-console.log('-----staffAges')
-const ageAvg = ageAvgFunc(data2);
+console.log('-----staffAgesAvg')
+const ageAvg = ageAvgFunc(people);
 assertEquals(290/7, ageAvg);
 console.log("The average of ages is:", ageAvg.toFixed(1));
 
 
-
-function makeEmailObj(nameObj) {
-	return nameObj.fname + "." + nameObj.lname + "@evolveu.ca";
-}
 
 function assertEquals(parm1, parm2) {
 	if(parm1 === parm2) {
