@@ -3,8 +3,7 @@
 }
 
 .icons {
-/*  animation: App-logo-spin infinite 5s linear;*/
-  pointer-events: none;
+  animation: App-logo-spin infinite 5s linear;
 }
 
 .App-logo {

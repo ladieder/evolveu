@@ -1,37 +1,76 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import icon1 from './icons/golf1.png';
-import icon2 from './icons/golf2.png';
-import icon3 from './icons/golf3.png';
-import icon4 from './icons/golf4.png';
-import icon5 from './icons/golf5.png';
+
+// ??? images work this but can't can't put link directly in src???
+
+import plusImg from './icons/plus.png';
+import minusImg from './icons/minus.png';
+import multImg from './icons/multiply.png';
+import divImg from './icons/divide.png';
+import MathComp from "./components/MathComp";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      iconClicked: ""
+      operator: "",
+      input1: null,
+      input2: null
     };
+    this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.clearFunc = this.clearFunc.bind(this);
+  }
+
+  handleChange(event) {
+    // ??? is this considered modifying state directly???
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   }
 
   handleClick(event) {
-    console.log("clicked", event.target.id);
     this.setState({
-      iconClicked: event.target.id
+      operator: event.target.alt,
     });
+
+    // ??? get error if put MathComp here ???
+    // <MathComp data={this.state} />
   }
+
+  // {can you get rid of state/this for clearFunc cause it doesn't need it ???}
+
+  clearFunc() {
+    document.getElementById("input1").value = "";
+    document.getElementById("input2").value = "";
+  }
+
+  // ??? should make img icons buttons???
 
   render() {
     return (
       <div className="App">
-        <div id="golf1"><img src={icon1} className="icons" height="100" width="100" alt="golf1" onClick={this.handleClick} /></div>
-        <div id="golf2"><img src={icon2} className="icons" height="100" width="100" alt="golf2" onClick={this.handleClick} /></div>
-        <div id="golf3"><img src={icon3} className="icons" height="100" width="100" alt="golf3" onClick={this.handleClick} /></div>
-        <div id="golf4"><img src={icon4} className="icons" height="100" width="100" alt="golf4" onClick={this.handleClick} /></div>
-        <div id="golf5"><img src={icon5} className="icons" height="100" width="100" alt="golf5" onClick={this.handleClick} /></div>
-        <h2>{this.state.iconClicked}</h2>
+
+        <div id="calculator">
+          <h1>Calculator</h1>
+          <h4>Input 1: </h4><input name="input1" id="input1" type="number" onChange={this.handleChange} />
+          <h4>Input 2: </h4><input name="input2" id="input2" type="number" onChange={this.handleChange} />
+          <h4>Choose Operator: </h4>
+
+          <img src={plusImg} className="mathIcons" id="plus" height="64" width="64" alt="+" onClick={this.handleClick} />
+          <img src={minusImg} className="mathIcons" id="minus" height="64" width="64" alt="-" onClick={this.handleClick} />
+          <img src={multImg} className="mathIcons" id="multiply" height="64" width="64" alt="*" onClick={this.handleClick} />
+          <img src={divImg} className="mathIcons" id="divide" height="64" width="64" alt="/" onClick={this.handleClick} />
+         
+          {/* ??? it works but should it use onClick??? ok to pass state??? */}
+
+          <MathComp data={this.state} />
+
+          <button type="button" id="clear" onClick={this.clearFunc}> Clear Calculator! </button><br /><br />
+        </div>
+
+
 
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
