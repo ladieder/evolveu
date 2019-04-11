@@ -8,7 +8,6 @@ import plusImg from './icons/plus.png';
 import minusImg from './icons/minus.png';
 import multImg from './icons/multiply.png';
 import divImg from './icons/divide.png';
-import calcImg from './icons/calculator.png';
 import MathComp from "./components/MathComp";
 
 class App extends Component {
@@ -21,9 +20,11 @@ class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.clearFunc = this.clearFunc.bind(this);
   }
 
   handleChange(event) {
+    // ??? is this considered modifying state directly???
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -33,7 +34,12 @@ class App extends Component {
     this.setState({
       operator: event.target.alt,
     });
+
+    // ??? get error if put MathComp here ???
+    // <MathComp data={this.state} />
   }
+
+  // {can you get rid of state/this for clearFunc cause it doesn't need it ???}
 
   clearFunc() {
     document.getElementById("input1").value = "";
@@ -46,20 +52,18 @@ class App extends Component {
     return (
       <div className="App">
 
-          <img src={calcImg} className="icons" id="plus" height="64" width="64" alt="calculator" onClick={this.handleClick} />
-
         <div id="calculator">
           <h1>Calculator</h1>
           <h4>Input 1: </h4><input name="input1" id="input1" type="number" onChange={this.handleChange} />
           <h4>Input 2: </h4><input name="input2" id="input2" type="number" onChange={this.handleChange} />
           <h4>Choose Operator: </h4>
 
-
-
           <img src={plusImg} className="mathIcons" id="plus" height="64" width="64" alt="+" onClick={this.handleClick} />
           <img src={minusImg} className="mathIcons" id="minus" height="64" width="64" alt="-" onClick={this.handleClick} />
           <img src={multImg} className="mathIcons" id="multiply" height="64" width="64" alt="*" onClick={this.handleClick} />
           <img src={divImg} className="mathIcons" id="divide" height="64" width="64" alt="/" onClick={this.handleClick} />
+         
+          {/* ??? it works but should it use onClick??? ok to pass state??? */}
 
           <MathComp data={this.state} />
 
