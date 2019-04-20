@@ -8,10 +8,12 @@ class Account {
 
 	deposit(depAmount) {
 		this.balance += depAmount;
+		return this.balance;
 	};
 
 	withdraw(wdAmount) {
 		this.balance -= wdAmount;
+		return this.balance;
 	};
 
 }

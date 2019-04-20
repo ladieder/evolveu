@@ -5,21 +5,33 @@ test("test controller", () => {
 	expect(accountCtrl.accountList.length).toBe(0);
 
 	console.log("test add account");
-	accountCtrl.addAccount(0, 25, "checkingAccount", "User1");
+	accountCtrl.addAccount(25, "checkingAccount", "User1");
 	expect(accountCtrl.accountList.length).toBe(1);
+	expect(accountCtrl.accountList[0].id).toBe(1);
 	expect(accountCtrl.accountList[0].balance).toBe(25);
 	expect(accountCtrl.accountList[0].accountName).toBe("checkingAccount");
 	expect(accountCtrl.accountList[0].userName).toBe("User1");
 
 	console.log("test add another account");
-	accountCtrl.addAccount(1, 50, "checkingAccount", "User2");
+	accountCtrl.addAccount(50, "checkingAccount", "User2");
 	expect(accountCtrl.accountList.length).toBe(2);
-	console.log(accountCtrl.accountList[0]);
-	console.log(accountCtrl.accountList[1]);
 
 	console.log("test delete account");
-	accountCtrl.deleteAccount(1);
-	console.log(accountCtrl.accountList[0]);
-	console.log(accountCtrl.accountList[1]);
-	// expect(accountCtrl.accountList.length).toBe(1);
+	accountCtrl.deleteAccount(2);
+	expect(accountCtrl.accountList.length).toBe(1);
+
+	console.log("test name account");
+
+
+	console.log("test total accounts");
+	console.log("add another account with $100");
+	accountCtrl.addAccount(100, "savingAccount", "User2");
+	expect(accountCtrl.totalAccounts()).toBe(125);
+
+	console.log("test max account balance");
+	expect(accountCtrl.maxAccount()).toBe(3);
+
+	console.log("test min account balance");
+	accountCtrl.minAccount();
+	expect(accountCtrl.minAccount()).toBe(1);
 });
