@@ -1,27 +1,15 @@
-.accountsHeader {
-  width: 400px;
-  padding: 10px;
-  overflow: auto;
-}
-
-.cardList {
-  list-style-type: none;
-  width: 400px;
-}
- 
-.accountCard:hover {
+.accountComp:hover {
   background: #a2f2e0;
   cursor: pointer;
 }
 
-.accountCard {
-  list-style-type: none;
+.accountComp {
+  float: right;
   width: 400px;
   padding: 10px;
   overflow: auto;
   border: 2px solid #008f6f;
   border-radius: 5px;
-  margin: 10px;
 }
 
 .btns {

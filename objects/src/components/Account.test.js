@@ -2,7 +2,7 @@ import Account from "./Account";
 
 test("test create new account", () => {
 	const newAccount = new Account (1, 25, "checkingAccount", "User");
-	expect(newAccount.id).toBe(1);
+	expect(newAccount.accountID).toBe(1);
 	expect(newAccount.balance).toBe(25);
 	expect(newAccount.accountName).toBe("checkingAccount");
 	expect(newAccount.userName).toBe("User");

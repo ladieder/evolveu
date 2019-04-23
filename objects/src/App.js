@@ -17,7 +17,6 @@ class App extends Component {
 
   handleClick(e) {
     this.setState({display: e.target.alt});
-    console.log(e.target.alt)
   }
 
   render() {

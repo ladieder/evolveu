@@ -7,7 +7,7 @@ test("test controller", () => {
 	console.log("test add account");
 	accountCtrl.addAccount(25, "checkingAccount", "User1");
 	expect(accountCtrl.accountList.length).toBe(1);
-	expect(accountCtrl.accountList[0].id).toBe(1);
+	expect(accountCtrl.accountList[0].accountID).toBe(1);
 	expect(accountCtrl.accountList[0].balance).toBe(25);
 	expect(accountCtrl.accountList[0].accountName).toBe("checkingAccount");
 	expect(accountCtrl.accountList[0].userName).toBe("User1");
