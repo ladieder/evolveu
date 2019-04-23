@@ -12,25 +12,25 @@ class AccountApp extends Component {
 		this.ctrl = new AccountsCtrl();
 		this.state = {
 			ctrl: this.ctrl,
-			displayID: null
+			displayIndex: null
 		}
 		this.addAccountClick = this.addAccountClick.bind(this);
 		this.mngAccountClick = this.mngAccountClick.bind(this);
 		this.deleteAccountClick = this.deleteAccountClick.bind(this);
-		this.updateBalance = this.updateBalance.bind(this);
+		this.closeWindowClick = this.closeWindowClick.bind(this);
+		this.updateAccount = this.updateAccount.bind(this);
 	};
 
 	deleteAccountClick(e) {
 		const idDelete = Number((e.target.id).slice(3, e.target.id.length));
-		const indexDelete = this.ctrl.accountList.findIndex(item => item.accountID === idDelete)
-		this.ctrl.deleteAccount(indexDelete);
+		this.ctrl.deleteAccount(idDelete);
 		this.setState({ctrl: this.ctrl});
 	}
 
 	mngAccountClick(e) {
 		const idMng = Number((e.target.id).slice(3, e.target.id.length));
 		const indexMng = this.ctrl.accountList.findIndex(item => item.accountID === idMng)
-		this.setState({displayID: indexMng});
+		this.setState({displayIndex: indexMng});
 	}
 
 	addAccountClick() {
@@ -38,8 +38,13 @@ class AccountApp extends Component {
 		this.setState({ctrl: this.ctrl});
 	};
 
-	updateBalance() {
+	closeWindowClick() {
+		this.setState({displayIndex: null});
+	};
+
+	updateAccount() {
 		this.setState({ctrl: this.ctrl});
+		// this.setState({displayIndex: this.displayIndex});
 	}
 
 	render() {
@@ -58,19 +63,21 @@ class AccountApp extends Component {
 		return(
 			<div>
 				<h1>EvolveU Bank</h1>
-				<h3>Total of Account Balances: {this.state.ctrl.total}</h3>
-				<h3>Max Account: {this.state.ctrl.max.balance}</h3>
-				<h3>Min Account: {this.state.ctrl.min.balance}</h3>
+				{/* what is diff b/w this.ctrl and this.state.ctrl???? */}
+				<h3>Total of Account Balances: {this.ctrl.totalAccounts()}</h3>
+				<h3>Max Account: {this.ctrl.maxAccount()}</h3>
+				<h3>Min Account: {this.ctrl.minAccount()}</h3>
 
-				{this.state.displayID !== null ? 
+				{this.state.displayIndex !== null ? 
 					<AccountComp 
-						accountData={this.ctrl.accountList[this.state.displayID]} 
-						accountID={this.state.displayID}
-						updateBalance={this.updateBalance} 
+						accountData={this.ctrl.accountList[this.state.displayIndex]} 
+						displayIndex={this.state.displayIndex}
+						updateAccount={this.updateAccount} 
+						closeWindowClick={this.closeWindowClick} 
 					/> 
 				: ""}
 
-				<button id="addBtn" type="button" onClick={this.addAccountClick}>Add Account</button>
+				<button className="btns" id="addBtn" type="button" onClick={this.addAccountClick}>Add Account</button>
 				<h2 className="accountsHeader">List of All Accounts</h2>
 				<ul className="cardList">{accountCard}</ul>
 	

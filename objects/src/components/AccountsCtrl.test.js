@@ -29,9 +29,9 @@ test("test controller", () => {
 	expect(accountCtrl.totalAccounts()).toBe(125);
 
 	console.log("test max account balance");
-	expect(accountCtrl.maxAccount()).toBe(3);
+	expect(accountCtrl.maxAccount()).toBe(100);
 
 	console.log("test min account balance");
 	accountCtrl.minAccount();
-	expect(accountCtrl.minAccount()).toBe(1);
+	expect(accountCtrl.minAccount()).toBe(25);
 });

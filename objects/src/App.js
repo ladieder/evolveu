@@ -4,9 +4,11 @@ import './App.css';
 
 import calcImg from "./icons/calculator.png";
 import dollarImg from "./icons/dollar.png";
+import globeImg from "./icons/globe.png";
+import golfImg from "./icons/golf5.png";
+
 import MathComp from "./components/MathComp";
 import AccountApp from "./components/AccountApp";
-import AccountComp from "./components/AccountComp";
 
 class App extends Component {
   constructor() {
@@ -29,9 +31,9 @@ class App extends Component {
       case "accounts":
         page = <AccountApp />
         break;
-      case "account":
-        page = <AccountComp />
-        break;
+      // case "account":
+      //   page = <AccountComp />
+      //   break;
       default:
         break;
     } 
@@ -41,8 +43,8 @@ class App extends Component {
       <div className="App">
         <img src={calcImg} className="icons" height="64" width="64" alt="calculator" onClick={this.handleClick}/>
         <img src={dollarImg} className="icons" height="64" width="64" alt="accounts" onClick={this.handleClick}/>
-        <img src={dollarImg} className="icons" height="64" width="64" alt="account" onClick={this.handleClick}/>
-        <img src={calcImg} className="icons" height="64" width="64" alt="placeholder" onClick={this.handleClick}/>
+        <img src={globeImg} className="icons" height="64" width="64" alt="account" onClick={this.handleClick}/>
+        <img src={golfImg} className="icons" height="64" width="64" alt="placeholder" onClick={this.handleClick}/>
     
         {page}
 

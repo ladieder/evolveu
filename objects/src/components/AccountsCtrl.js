@@ -4,9 +4,6 @@ class AccountsCtrl {
 	constructor() {
 		this.accountList = [];
 		this.counter = 1;
-		this.total = null;
-		this.max = {accountID: null, balance: null, accountName: "", userName: ""}
-		this.min = {accountID: null, balance: null, accountName: "", userName: ""}
 	};
 
 	addAccount(startingBalance, accountName, userName) {
@@ -25,39 +22,36 @@ class AccountsCtrl {
 	
 	//need to have return for test to work --- fix!!!
 	totalAccounts() {
-		this.total = (this.accountList.reduce((accumulator, currentValue) => {
+		return (this.accountList.reduce((accumulator, currentValue) => {
 			return accumulator + currentValue.balance;
 		}, 0));	
 	};
 
 	maxAccount() {
 		if (this.accountList.length > 0) {
-			let maxID = this.accountList[0].accountID;
+			// let maxID = this.accountList[0].accountID;
 			let maxBalance = this.accountList[0].balance;
 			this.accountList.forEach(item => {
 				if (item.balance > maxBalance) {
 					maxBalance = item.balance;
-					maxID = item.accountID;
+					// maxID = item.accountID;
 				};
 			});
-			this.max.accountID = maxID;
-			this.max.balance = maxBalance;
-			console.log("max", this.max.accountID);
+			return maxBalance;
 		};
 	}; 
 
 	minAccount() {
 		if (this.accountList.length > 0) {
-			let minID = this.accountList[0].accountID;
+			// let minID = this.accountList[0].accountID;
 			let minBalance = this.accountList[0].balance;
 			this.accountList.forEach(item => {
 				if (item.balance < minBalance) {
 					minBalance = item.balance;
-					minID = item.accountID;
+					// minID = item.accountID;
 				};
 			});
-			this.min.accountID = minID;
-			this.min.balance = minBalance;
+			return minBalance;
 		};
 	}; 
 };

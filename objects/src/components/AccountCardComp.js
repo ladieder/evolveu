@@ -5,7 +5,7 @@ class AccountCardComp extends Component {
 	render() {
 		return (
 			<div className="accountCards">
-				<h4>{this.props.accountData.accountName}</h4>
+				<h5>{this.props.accountData.accountName}</h5>
 				<h5>Account ID: {this.props.accountData.accountID}</h5>
 				<h5>Account Balance: ${this.props.accountData.balance}</h5>
 				<button className="btns" type="button" id={"mng"+this.props.accountData.accountID} onClick={this.props.mngBtn}>Manage Account</button>
