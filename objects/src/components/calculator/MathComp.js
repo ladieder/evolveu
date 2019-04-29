@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import math from "./math"
 
-import plusImg from '../icons/plus.png';
-import minusImg from '../icons/minus.png';
-import multImg from '../icons/multiply.png';
-import divImg from '../icons/divide.png';
+import plusImg from './icons/plus.png';
+import minusImg from './icons/minus.png';
+import multImg from './icons/multiply.png';
+import divImg from './icons/divide.png';
 
 function Calculator(props) {
 	let ans;

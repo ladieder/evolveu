@@ -1,10 +1,12 @@
-.accountComp:hover {
+.cityCardComp:hover {
   background: #a2f2e0;
   cursor: pointer;
 }
 
-.accountComp {
-  float: right;
+.cityCardComp {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 400px;
   padding: 10px;
   overflow: auto;

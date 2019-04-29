@@ -36,6 +36,7 @@ class AccountComp extends Component {
 				<h4>{this.props.accountData.accountName}</h4>
 				<h4>Account ID: {this.props.accountData.accountID}</h4>
 				<h4>Account Balance: {this.props.accountData.balance}</h4>
+				<br />
 				<h5>Add account funds:</h5>
 				<input id="depositInput" type="number"/>
 				<button className="btns" id="depositBtn" type="button" onClick={this.depositClick}>Submit</button>

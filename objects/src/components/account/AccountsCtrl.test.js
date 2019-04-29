@@ -20,9 +20,6 @@ test("test controller", () => {
 	accountCtrl.deleteAccount(2);
 	expect(accountCtrl.accountList.length).toBe(1);
 
-	console.log("test name account");
-
-
 	console.log("test total accounts");
 	console.log("add another account with $100");
 	accountCtrl.addAccount(100, "savingAccount", "User2");

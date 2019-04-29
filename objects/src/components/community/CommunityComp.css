@@ -1,0 +1,27 @@
+.cityCard:hover {
+  background: #a2f2e0;
+  cursor: pointer;
+}
+
+.cityCard {
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 400px;
+  padding: 10px;
+  overflow: auto;
+  border: 2px solid #008f6f;
+  border-radius: 5px;
+}
+
+.btns {
+	padding: 10px 24px;
+	border-radius: 8px;
+	border: 1px solid #008f6f;
+	margin: 10px;
+}
+
+.btns:hover {
+  background-color: #008f6f;
+  color: white;
+}

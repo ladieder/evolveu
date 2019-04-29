@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 import AccountsCtrl from "./AccountsCtrl";
 import AccountCardComp from "./AccountCardComp";
 import AccountComp from "./AccountComp";
 
-import './AccountApp.css';
+import "./AccountApp.css";
 
 class AccountApp extends Component {
 	constructor() {
@@ -61,26 +61,34 @@ class AccountApp extends Component {
 		});
 
 		return(
-			<div>
-				<h1>EvolveU Bank</h1>
-				{/* what is diff b/w this.ctrl and this.state.ctrl???? */}
-				<h3>Total of Account Balances: {this.ctrl.totalAccounts()}</h3>
-				<h3>Max Account: {this.ctrl.maxAccount()}</h3>
-				<h3>Min Account: {this.ctrl.minAccount()}</h3>
+			<div className="accountApp">
+				<div className="header">
+					<h1>EvolveU Bank</h1>
+					{/* what is diff b/w this.ctrl and this.state.ctrl here???? */}
+					<h3>Summary of Accounts</h3>
+					<h4>Total of Account Balances: {this.ctrl.totalAccounts()}</h4>
+					<h4>Max Account: {this.ctrl.maxAccount()}</h4>
+					<h4>Min Account: {this.ctrl.minAccount()}</h4>
+					<button className="btns" id="addBtn" type="button" onClick={this.addAccountClick}>Add Account</button>
+				</div>
 
-				{this.state.displayIndex !== null ? 
-					<AccountComp 
-						accountData={this.ctrl.accountList[this.state.displayIndex]} 
-						displayIndex={this.state.displayIndex}
-						updateAccount={this.updateAccount} 
-						closeWindowClick={this.closeWindowClick} 
-					/> 
-				: ""}
+				<div className="containers">
+					<div className="containerLeft">
+						<ul className="cardList">{accountCard}</ul>
+					</div>
 
-				<button className="btns" id="addBtn" type="button" onClick={this.addAccountClick}>Add Account</button>
-				<h2 className="accountsHeader">List of All Accounts</h2>
-				<ul className="cardList">{accountCard}</ul>
-	
+					<div className="containerRight">
+						{this.state.displayIndex !== null ? 
+							<AccountComp 
+								accountData={this.ctrl.accountList[this.state.displayIndex]} 
+								displayIndex={this.state.displayIndex}
+								updateAccount={this.updateAccount} 
+								closeWindowClick={this.closeWindowClick} 
+							/> 
+						: ""}
+					</div>
+				</div>
+
 				<br /><br />
 			</div>
 		);
