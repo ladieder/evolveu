@@ -6,12 +6,14 @@ import calcImg from "./icons/calculator.png";
 import dollarImg from "./icons/dollar.png";
 import globeImg from "./icons/globe.png";
 import linkImg from "./icons/link.png";
+import listImg from "./icons/list.png";
 import golfImg from "./icons/golf5.png";
 
 import MathComp from "./components/calculator/MathComp";
 import AccountApp from "./components/account/AccountApp";
 import WorldApp from "./components/community/WorldApp";
 import LinkApp from "./components/linkedLists/LinkApp";
+import ListApp from "./components/list/ListApp";
 
 class App extends Component {
   constructor() {
@@ -40,6 +42,9 @@ class App extends Component {
       case "link":
         page = <LinkApp />
         break;
+      case "list":
+        page = <ListApp />
+        break;
       case "golf":
         page = null;
         break;
@@ -54,6 +59,7 @@ class App extends Component {
         <img src={dollarImg} className="icons" height="64" width="64" alt="accounts" onClick={this.handleClick}/>
         <img src={globeImg} className="icons" height="64" width="64" alt="world" onClick={this.handleClick}/>
         <img src={linkImg} className="icons" height="64" width="64" alt="link" onClick={this.handleClick}/>
+        <img src={listImg} className="icons" height="64" width="64" alt="list" onClick={this.handleClick}/>
         <img src={golfImg} className="icons" height="64" width="64" alt="golf" onClick={this.handleClick}/>
 
         {page}

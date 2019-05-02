@@ -65,8 +65,8 @@ class LinkApp extends React.Component {
 				</div>
 
 				<div className="contTop">
-					<input id="subjInput" type="text" placeholder="subject"/><br/>
-					<input id="amountInput" type="number" placeholder="amount"/><br/>
+					<input id="subjInput" type="text" placeholder="enter subject"/><br/>
+					<input id="amountInput" type="number" placeholder="enter amount"/><br/>
 					<button className="btns" type="button" onClick={this.insertClick}>Insert Node (After Current Node)</button>
 				</div>
 
