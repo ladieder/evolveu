@@ -20,7 +20,6 @@ class AccountsCtrl {
 		this.accountList = result;
 	};
 	
-	//need to have return for test to work --- fix!!!
 	totalAccounts() {
 		return (this.accountList.reduce((accumulator, currentValue) => {
 			return accumulator + currentValue.balance;

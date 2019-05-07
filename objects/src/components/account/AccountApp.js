@@ -78,14 +78,14 @@ class AccountApp extends Component {
 					</div>
 
 					<div className="containerRight">
-						{this.state.displayIndex !== null ? 
-							<AccountComp 
+						{this.state.displayIndex !== null 
+							? <AccountComp 
 								accountData={this.ctrl.accountList[this.state.displayIndex]} 
 								displayIndex={this.state.displayIndex}
 								updateAccount={this.updateAccount} 
 								closeWindowClick={this.closeWindowClick} 
-							/> 
-						: ""}
+								/> 
+							: ""}
 					</div>
 				</div>
 

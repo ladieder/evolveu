@@ -119,7 +119,7 @@ test("test LinkedList class", () => {
 	// []
 
 	console.log("test totalNodes method on empty linked list");
-	expect(testLinkedList.totalNodes()).toBe("error: linked list is empty");
+	expect(testLinkedList.totalNodes()).toBe("error - linked list is empty");
 
 	console.log("test totalNodes method");
 	testLinkedList.insertNode("node1", 2);
