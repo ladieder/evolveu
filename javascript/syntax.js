@@ -1,10 +1,9 @@
-											//should this be in .js file?
 // define attributes / variables
 console.log("made it to syntax.js")
 
 // number syntax
 // numbers can be whole...
-let x = 3; 									//*** let vs. const???
+let x = 3; 
 console.log("x = ", x);
 // or decimals
 let y = 3.14;
@@ -130,7 +129,7 @@ do {
 while (i < 5);
 // forEach (with array and function)
 let sum = 0;
-function sumFunc(item) {				//don't understand	
+function sumFunc(item) {	
 	sum += item;
 	console.log(sum);
 }
