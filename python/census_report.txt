@@ -1,0 +1,17 @@
+304 lines of data in the source data file
+
+CLASS Resident Count Breakdown 
+1263734 residents in Residential
+2580 residents in Residual Sub Area
+922 residents in Industrial
+0 residents in Major Park
+
+SECTOR Resident Count Breakdown
+227421 residents in SOUTH
+58405 residents in EAST
+185562 residents in NORTHEAST
+160576 residents in NORTH
+199977 residents in CENTRE
+175448 residents in NORTHWEST
+135314 residents in SOUTHEAST
+124533 residents in WEST
