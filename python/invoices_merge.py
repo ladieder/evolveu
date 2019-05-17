@@ -1,4 +1,5 @@
 from openpyxl import load_workbook
+
 wbmerge = load_workbook('invoices.xlsx')
 wbmaster = load_workbook('invoices_master.xlsx')
 

@@ -1,6 +1,5 @@
 from openpyxl import load_workbook
 wb = load_workbook('invoices.xlsx')
-print(wb.sheetnames)
 
 cust_ws = wb["customers"]
 inv_ws = wb["invoices"]
@@ -26,7 +25,7 @@ for row in lines_ws.iter_rows(min_row=2, max_col=3, values_only=True):
         for rowprod in prod_ws.iter_rows(min_row=2, values_only=True):
             if rowprod[0] == row[1]:
                 sub_total = row[2] * rowprod[2]
-                lines_list.append({"prod_id": row[1], "prod_name": rowprod[1], "quantity": row[2], "prod_cost": rowprod[2], "subtotal": sub_total})
+                lines_list.append({"prod_id": row[1], "prod_name": rowprod[1], "quantity": row[2], "prod_cost": rowprod[2], "sub_total": sub_total})
                 tot_inv_cost += sub_total
 
 invoice_output = load_workbook("invoice_template.xlsx")
@@ -44,7 +43,7 @@ for i, line in enumerate(lines_list):
     ws.cell(row=i+9, column=2, value=line["prod_id"])
     ws.cell(row=i+9, column=3, value=line["prod_cost"])
     ws.cell(row=i+9, column=4, value=line["quantity"])
-    ws.cell(row=i+9, column=5, value=line["subtotal"])
+    ws.cell(row=i+9, column=5, value=line["sub_total"])
 
 newfilename = "invoice" + str(invnum) + ".xlsx"
 invoice_output.save(newfilename)
