@@ -1,38 +1,53 @@
+import pprint
 from openpyxl import load_workbook
 from invoices_validation import invoices_validation
 
-# wbmerge = load_workbook('invoices.xlsx')
-# wbmaster = load_workbook('invoices_master.xlsx')
-
 def invoices_merge(wb_merge):
+    wb_master = 'invoices_master.xlsx'
     dict_merge = invoices_validation(wb_merge)
-    dict_master = invoices_validation('invoices_master.xlsx')
+    dict_master = invoices_validation(wb_master)
 
-    print(dict_merge)
-    print(dict_master)
+    print("dict_merge")
+    pprint.pprint(dict_merge)
+    print("dict_master")
+    pprint.pprint(dict_master)
 
+    # dict_merged = {}
     if dict_master["sheet_names"] != dict_merge["sheet_names"]:
         print("error - workbook sheet names do not match")
     else:
-        pass
+        dict_master["cust_dict"].update(dict_merge["cust_dict"])
+        print("dict_master updated")
+        pprint.pprint(dict_master)
 
-        # *** remember to filter out duplicates
+        # print updated dict to master workbook
+        wb = load_workbook(wb_master)
+        cust_ws = wb["customers"]
+        inv_ws = wb["invoices"]
+        lines_ws = wb["line_items"]
+        prod_ws = wb["products"]
 
-        # merge customers
+        for i, item in enumerate(dict_master["cust_dict"]):
+            cust_ws.cell(row=i+2, column=1, value=item)
+            cust_ws.cell(row=i+2, column=2, value=dict_master["cust_dict"][item])
 
-        # merge products
+        for i, item in enumerate(dict_master["inv_dict"]):
+            inv_ws.cell(row=i+2, column=1, value=item)
+            inv_ws.cell(row=i+2, column=2, value=dict_master["inv_dict"][item]["cust_id"])
+            inv_ws.cell(row=i+2, column=3, value=dict_master["inv_dict"][item]["invoice_date"])
 
-        # merge invoices
+        for i, item in enumerate(dict_master["inv_dict"]):
+            for line in dict_master["inv_dict"][item]["line_items"]:
+                lines_ws.cell(row=i+2, column=1, value=item)
+                lines_ws.cell(row=i+2, column=2, value=line["prod_id"])
+                lines_ws.cell(row=i+2, column=3, value=line["quantity"])
+                i = i + 1
 
+        for i, item in enumerate(dict_master["prod_dict"]):
+            prod_ws.cell(row=i+2, column=1, value=item)
+            prod_ws.cell(row=i+2, column=2, value=dict_master["prod_dict"][item]["prod_name"])
+            prod_ws.cell(row=i+2, column=3, value=dict_master["prod_dict"][item]["prod_cost"])
 
-invoices_merge('invoices.xlsx')
+        wb.save(wb_master)
 
-
-
-# l = [[1, 2, 3], [2, 4, 5], [1, 2, 3], [2, 4, 5]]
-# # s = set(tuple(i) for i in l)
-# s = set()
-# for i in l:
-#     s.add(tuple(i))
-
-# print(s)
+invoices_merge('invoices_feb.xlsx')

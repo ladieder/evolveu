@@ -43,8 +43,6 @@ def invoices_validation(workbook):
             else:
                 cust_dict[row[0]] = row[1]
 
-    print(cust_dict)
-
     # check 'Products'sheet for duplicate product ids
     prod_dict = {}
     for row in prod_ws.iter_rows(min_row=2, max_col=4, values_only=True):
