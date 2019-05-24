@@ -1,16 +1,37 @@
 from openpyxl import load_workbook
+import pprint
 
 def invoices_validation(workbook):
     wb = load_workbook(workbook)
 
     print("data validation for ", workbook)
 
-    sheet_names = wb.sheetnames
     cust_ws = wb["customers"]
     inv_ws = wb["invoices"]
     lines_ws = wb["line_items"]
     prod_ws = wb["products"]
 
+    data_dict = {}
+    data_dict["sheet_names"] = wb.sheetnames
+    data_dict["cust_dict"] = create_cust_dict(cust_ws)
+    data_dict["prod_dict"] = create_prod_dict(prod_ws)
+    data_dict["inv_dict"] = create_inv_dict(inv_ws, lines_ws, data_dict["prod_dict"])
+
+    # check number of invoices and print result
+    print("number of invoices: ", len(data_dict["inv_dict"]))
+
+    # check total of all invoices
+    if len(data_dict["inv_dict"]) != 0:
+        month_total = 0
+        for item in data_dict["inv_dict"]:
+            month_total += data_dict["inv_dict"][item]["inv_total"]
+        print("total of all invoices: ", month_total)
+
+    return data_dict
+
+
+
+def create_cust_dict(cust_ws):
     # check 'Customers' sheet for duplicate customer ids and for blank customer ids or customer names
     cust_dict = {}
     for row in cust_ws.iter_rows(min_row=2, max_col=2, values_only=True):
@@ -42,7 +63,12 @@ def invoices_validation(workbook):
             # else (cust_id is not duplicated and cust_name is not blank), add customter to cust_dict
             else:
                 cust_dict[row[0]] = row[1]
+    
+    return cust_dict
 
+
+
+def create_prod_dict(prod_ws):
     # check 'Products'sheet for duplicate product ids
     prod_dict = {}
     for row in prod_ws.iter_rows(min_row=2, max_col=4, values_only=True):
@@ -58,6 +84,11 @@ def invoices_validation(workbook):
         else:
             prod_dict[row[0]] = {"prod_name": row[1], "prod_cost": row[2]}
 
+    return prod_dict
+
+
+
+def create_inv_dict(inv_ws, lines_ws, prod_dict):
     # check 'Invoices' sheet for duplicate invoices
     inv_dict = {}
     for row in inv_ws.iter_rows(min_row=2, max_col=3, values_only=True):
@@ -98,16 +129,6 @@ def invoices_validation(workbook):
         inv_dict[row[0]]["line_items"] = line_list
         inv_dict[row[0]]["inv_total"] = inv_total
 
-    # check number of invoices and print result
-    num_invoices = len(inv_dict)
-    print("number of invoices: ", num_invoices)
+    return inv_dict
 
-    # check total of all invoices
-    month_total = 0
-    for item in inv_dict:
-        month_total += inv_dict[item]["inv_total"]
-    print("total of all invoices: ", month_total)
-
-    data_dict = {"cust_dict": cust_dict, "prod_dict": prod_dict, "inv_dict": inv_dict, "sheet_names": sheet_names}
-
-    return data_dict
+# invoices_validation("invoices_test_master.xlsx")

@@ -1,24 +1,18 @@
-import pprint
 from openpyxl import load_workbook
 from invoices_validation import invoices_validation
+import pprint
 
-def invoices_merge(wb_merge):
-    wb_master = 'invoices_master.xlsx'
+def invoices_merge(wb_merge, wb_master):
     dict_merge = invoices_validation(wb_merge)
     dict_master = invoices_validation(wb_master)
 
-    print("dict_merge")
-    pprint.pprint(dict_merge)
-    print("dict_master")
-    pprint.pprint(dict_master)
-
-    # dict_merged = {}
     if dict_master["sheet_names"] != dict_merge["sheet_names"]:
         print("error - workbook sheet names do not match")
-    else:
+    else:        
+        # merge dict_merge with dict_master
         dict_master["cust_dict"].update(dict_merge["cust_dict"])
-        print("dict_master updated")
-        pprint.pprint(dict_master)
+        dict_master["prod_dict"].update(dict_merge["prod_dict"])
+        dict_master["inv_dict"].update(dict_merge["inv_dict"]) 
 
         # print updated dict to master workbook
         wb = load_workbook(wb_master)
@@ -36,7 +30,8 @@ def invoices_merge(wb_merge):
             inv_ws.cell(row=i+2, column=2, value=dict_master["inv_dict"][item]["cust_id"])
             inv_ws.cell(row=i+2, column=3, value=dict_master["inv_dict"][item]["invoice_date"])
 
-        for i, item in enumerate(dict_master["inv_dict"]):
+        i=0
+        for item in dict_master["inv_dict"]:
             for line in dict_master["inv_dict"][item]["line_items"]:
                 lines_ws.cell(row=i+2, column=1, value=item)
                 lines_ws.cell(row=i+2, column=2, value=line["prod_id"])
@@ -50,4 +45,4 @@ def invoices_merge(wb_merge):
 
         wb.save(wb_master)
 
-invoices_merge('invoices_feb.xlsx')
+        return dict_master
