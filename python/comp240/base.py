@@ -10,6 +10,10 @@ def index():
 def invoices():
     return render_template('invoices.html')
 
+@app.route('/invoice_details')
+def invoice_details():
+    return render_template('invoice_details.html')
+
 @app.route('/products')
 def products():
     return render_template('products.html')
