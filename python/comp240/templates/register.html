@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to the registration page!</h1>
-<p>Fill out the form.</p>
+<div class="jumbotron">
+    <h1>Welcome to the registration page.</h1>
+</div>
+
+<p>Fill out the form to register.</p>
     <form action="{{url_for('thank_you')}}">
         <label for="first">First Name:</label>
         <input type="text" name="first">
