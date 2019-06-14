@@ -8,40 +8,45 @@
 
 <div id='printArea'>
 
-{# 
-        
-    <!-- ********** CHECK THESE / FILL THESE IN ********** -->
     <h3>EvolveU Invoice</h3>
-    <h4>Invoice Number: {{invoice.inv_id}}</h4>
-    <h4>Invoice Date: {{invoice.inv_date}}</h4>
-    <h4>Customer Name: {{customer.name}}</h4>
-    <h4>Customer ID: {{customer.id}}</h4>
+   
+    <ul class='list-group'>
+            <li>Invoice Number: {{invoice.inv_num}}</li>
+            <li>Invoice Date: {{invoice.inv_date}}</li>
+            <li>Customer Name: {{customer.cust_name}}</li>
+            <li>Customer ID: {{invoice.cust_id}}</li>
+            <br />
 
-    <table>
-        <tr>
-        <th>Product Name</th>
-        <th>Product ID</th>
-        <th>Product Cost</th>
-        <th>Quantity</th>
-        <th>Sub Total</th>
-        </tr>
+    </ul>
+    
+
+    <table class="table table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th>Product Name</th>
+                <th>Product ID</th>
+                <th>Product Cost</th>
+                <th>Quantity</th>
+                <th>Sub Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in lines %}
+            <tr>
+            <td>{{products[line.prod_id].prod_name}}</td>
+            <td>{{line.prod_id}}</td>
+            <td>{{products[line.prod_id].prod_cost}}</td>
+            <td>{{line.qty}}</td>
+            <td>{{line.qty*products[line.prod_id].prod_cost}}</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
         
-        <!-- ********** FILL THESE IN ********** -->
-        {% for item in invoices %}
-        <tr>
-        <td>{{}}</td>
-        <td>{{}}</td>
-        <td>{{}}</td>
-        <td>{{}}</td>
-        <td>{{}}</td>
-        </tr>
-        {% endfor %}
         
     </table>
 
-    <h4>Invoice Total: {{}}</h4>
-
-#}
+    <h4>Invoice Total: {{total}}</h4>
 
 </div>
 
@@ -49,7 +54,6 @@
     function printDiv(divName) {
         const printContents = document.getElementById(divName).innerHTML;
         const originalContents = document.body.innerHTML;
-
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
